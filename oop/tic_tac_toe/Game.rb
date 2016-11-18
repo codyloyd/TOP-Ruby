@@ -1,7 +1,6 @@
 require "./Gameboard"
 require "./Player"
 
-
 class Game
   attr_accessor :board, :player1, :player2, :active_player
   def initialize(args)
@@ -38,6 +37,5 @@ class Game
       false
     end   
   end
-
 end
 
