@@ -1,19 +1,24 @@
 require "./Gameboard"
 require "./Player"
 require "./Game"
+require "./AI"
 
 player1 = Player.new({name:"Player 1",mark:"X"})
-player2 = Player.new({name:"Player 2",mark:"0"})
+player2 = AI.new({name:"bot",mark:"0"})
 board = Gameboard.new
 game = Game.new({board:board,player1:player1,player2:player2})
 
 def get_game_move
-  input = gets.chomp
-  if (0..8).include?(input.to_i)
-    return input.to_i
+  if game.active_player.is_a? Player
+    input = gets.chomp
+    if (0..8).include?(input.to_i)
+      return input.to_i
+    else
+      puts "oops, try again"
+      get_game_move
+    end
   else
-    puts "oops, try again"
-    get_game_move
+    game.active_player.place_mark
   end
 end
 
