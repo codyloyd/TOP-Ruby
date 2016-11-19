@@ -8,17 +8,17 @@ player2 = AI.new({name:"bot",mark:"0"})
 board = Gameboard.new
 game = Game.new({board:board,player1:player1,player2:player2})
 
-def get_game_move
-  if game.active_player.is_a? Player
+def get_game_move(player, board, game)
+  if player.is_a? AI
+    player.place_mark(game)
+  else
     input = gets.chomp
     if (0..8).include?(input.to_i)
       return input.to_i
     else
       puts "oops, try again"
-      get_game_move
+      get_game_move(player, board)
     end
-  else
-    game.active_player.place_mark
   end
 end
 
@@ -27,7 +27,8 @@ puts board.to_s
 
 until board.win? || board.tie? do
   puts "It is #{game.active_player.name}'s turn."
-  guess = get_game_move
+  guess = get_game_move(game.active_player, board, game)
+  puts "guess is #{guess}"
   if board.add({mark:game.active_player.mark, position: guess})
     puts board.to_s
     game.switch_active_player

@@ -7,6 +7,10 @@ describe "Gameboard" do
                                "","","",
                                "","",""])
   end
+  it "can initialize with an array" do 
+    board = Gameboard.new(["X","X","X","","","","","",""])
+    expect(board.board).to eql(["X","X","X","","","","","",""])
+  end
 
   describe "add" do
     it "adds marker to the board" do 

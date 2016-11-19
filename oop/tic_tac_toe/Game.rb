@@ -26,6 +26,14 @@ class Game
     end
   end
 
+  def non_active_player
+    if self.active_player == player1
+      player2
+    else
+      player1
+    end
+  end
+
   def winner
     if board.win?
       if player1.mark == board.win?
