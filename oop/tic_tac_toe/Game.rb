@@ -1,17 +1,18 @@
-require "./Gameboard"
-require "./Player"
+require './Gameboard'
+require './Player'
 
+# this class containes all the game methods
 class Game
   attr_accessor :board, :player1, :player2, :active_player
   def initialize(args)
     @board = args[:board]
     @player1 = args[:player1]
     @player2 = args[:player2]
-    @active_player = args[:active_player] || set_initial_player(player1,player2)
+    @active_player = args[:active_player] || set_initial_player(player1, player2)
   end
 
   def set_initial_player(player1,player2)
-    if (rand 2 ) == 1
+    if (rand 2) == 1
       player1
     else
       player2
@@ -43,11 +44,15 @@ class Game
       end
     else
       false
-    end   
+    end
   end
 
   def clone
-    Game.new({board: board.clone, player1:player1, player2:player2, active_player:active_player})
+    Game.new(
+      board: board.clone,
+      player1: player1,
+      player2: player2,
+      active_player: active_player
+    )
   end
 end
-
