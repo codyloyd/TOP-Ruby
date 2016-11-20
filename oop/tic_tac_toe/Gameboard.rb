@@ -46,6 +46,10 @@ class Gameboard
 ---+---+---
  #{board_with_spaces[6]} | #{board_with_spaces[7]} | #{board_with_spaces[8]}"
   end
+  def clone
+    Gameboard.new(self.board.clone)
+  end
+
 
   private
     def win_conditions

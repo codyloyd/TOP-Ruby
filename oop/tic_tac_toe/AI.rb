@@ -7,11 +7,19 @@ class AI < Player
   end
 
   def place_mark(game)
-    move = minimax(game)
-    possible_moves = get_possible_moves(game.board.board)
-    possible_moves[move]
+    move = find_move(game.clone)
+    return move
+    # puts "move ==== #{move}"
+    # possible_moves = get_possible_moves(game.board.board)
+    # possible_moves[move]
   end
   
+  def find_move(game)
+    @best_move = 0
+    minimax(game)
+    @best_move
+  end
+
   def minimax(game)
     board = game.board 
     player = game.active_player
@@ -22,18 +30,15 @@ class AI < Player
       possible_game = game.clone
       possible_game.board.add({position:move,mark:player.mark})
       possible_game.switch_active_player
-      puts possible_game.board.to_s
-      puts ""
       scores[move] = minimax(possible_game)
     end
-
+    # puts scores.to_s
     if game.active_player == self
-      return scores.key(scores.max)
+      @best_move = scores.key(scores.values.max)
+      return scores.values.max
     else
-      return scores.key(scores.min)
+      return scores.values.min
     end
-    # if not self return the lowest score
-    puts scores.to_s
   end
 
   private

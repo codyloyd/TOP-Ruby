@@ -7,7 +7,7 @@ class Game
     @board = args[:board]
     @player1 = args[:player1]
     @player2 = args[:player2]
-    @active_player = set_initial_player(player1,player2)
+    @active_player = args[:active_player] || set_initial_player(player1,player2)
   end
 
   def set_initial_player(player1,player2)
@@ -44,6 +44,10 @@ class Game
     else
       false
     end   
+  end
+
+  def clone
+    Game.new({board: board.clone, player1:player1, player2:player2, active_player:active_player})
   end
 end
 
